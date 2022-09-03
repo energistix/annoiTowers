@@ -11,13 +11,15 @@ const renderer = new THREE.WebGLRenderer({ antialias: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
-const woodMat = new MeshBasicMaterial({ map: new TextureLoader().load("./wood.jpg") })
+const woodTexture = new TextureLoader().load("./wood.jpg")
+const woodMat = new MeshBasicMaterial({ map: woodTexture })
+const darkerWoodMat = new MeshBasicMaterial({ map: woodTexture, color: 0xCCCCCC })
 
-const box = new Mesh(new BoxGeometry(40, 2, 12, 2, 2, 2), woodMat)
+const box = new Mesh(new BoxGeometry(40, 2, 12, 2, 2, 2), darkerWoodMat)
 scene.add(box)
 
 function cylinder(x = 0) {
-  const shape = new Mesh(new CylinderGeometry(1, 1, 10, 15, 5), woodMat)
+  const shape = new Mesh(new CylinderGeometry(1, 1, 10, 15, 5), darkerWoodMat)
   shape.position.x = x
   shape.position.y += 5
   box.add(shape)
@@ -66,13 +68,14 @@ function moveDisks(i1: index = 0, i2: index = 2, n: number = 0) {
   if (n == 1) {
     moveDisk(i1, i2)
   } else {
-    const i3: index = ([0, 1, 2] as index[]).filter((i) => i !== i1 && i !== i2)[0]
+    const i3 = ([0, 1, 2] as index[]).filter((i) => i !== i1 && i !== i2)[0]
     moveDisks(i1, i3, n - 1)
     moveDisk(i1, i2)
     moveDisks(i3, i2, n - 1)
   }
 }
-moveDisks(0,2)
+
+moveDisks()
 
 window.addEventListener("resize", onWindowResize, false)
 function onWindowResize() {
