@@ -1,3 +1,3 @@
 # annoiTowers
 
-(link)[https://energistix.github.io/annoiTowers/dist/client/]
+[Github pages link](https://energistix.github.io/annoiTowers/dist/client/)
