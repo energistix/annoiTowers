@@ -114,8 +114,11 @@ function animate() {
   requestAnimationFrame(animate)
   const action = animator.action
   if(action){
-    action[0].position[action[1]] += (action[2] - action[0].position[action[1]])/5
-    if(Math.abs(action[2] - action[0].position[action[1]]) < .05) animator.emit("done")
+    action[0].position[action[1]] += (action[2] - action[0].position[action[1]])/3
+    if(Math.abs(action[2] - action[0].position[action[1]]) < .05) {
+      action[0].position[action[1]] = action[2]
+      animator.emit("done")
+    }
   }
 
   renderer.render(scene, camera)
