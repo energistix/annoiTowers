@@ -67,12 +67,12 @@ function moveDisks(i1: index = 0, i2: index = 2, n: number = 0) {
   if (!n) n = disks[i1].length
   if (n == 1) {
     moveDisk(i1, i2)
-  } else {
-    const i3 = ([0, 1, 2] as index[]).filter((i) => i !== i1 && i !== i2)[0]
-    moveDisks(i1, i3, n - 1)
-    moveDisk(i1, i2)
-    moveDisks(i3, i2, n - 1)
+    return;
   }
+  const i3 = ([0, 1, 2] as index[]).filter((i) => i !== i1 && i !== i2)[0]
+  moveDisks(i1, i3, n - 1)
+  moveDisk(i1, i2)
+  moveDisks(i3, i2, n - 1)
 }
 
 moveDisks()
@@ -87,11 +87,6 @@ function onWindowResize() {
 function animate() {
   requestAnimationFrame(animate)
 
-  render()
-}
-
-function render() {
   renderer.render(scene, camera)
 }
-
 animate()
