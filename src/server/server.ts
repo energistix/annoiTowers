@@ -23,5 +23,3 @@ class App {
 }
 
 new App(port).Start()
-
-console.log("test")
